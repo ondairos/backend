@@ -17,10 +17,16 @@ app.get("/houses", (req: Request, res: Response) => {
   const name = req.query.name as string;
 
   if (name) {
-    const house = housesData.find(
-      (foundHouse) => foundHouse.name.toLowerCase() === name.toLowerCase()
+    // find a house by any chars contained in the name
+    // ffi should return griffyndor
+    // filter with the name param included in the house name
+    // an array that we will push the results
+    let housesFilteredArray = [];
+    housesFilteredArray = housesData.filter((foundHouse) =>
+      foundHouse.name.toLowerCase().includes(name.toLowerCase())
     );
-    res.json(house);
+
+    res.json(housesFilteredArray);
   } else {
     res.json(housesData);
   }
