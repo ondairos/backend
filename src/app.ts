@@ -1,10 +1,14 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
+// @ts-expect-error cors
+import cors from "cors";
 
 import { housesData } from "./rawData";
 
 const app = express();
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.get("/houses", (req: Request, res: Response) => {
   if (!housesData) {
